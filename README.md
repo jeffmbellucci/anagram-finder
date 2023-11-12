@@ -1,5 +1,5 @@
 ## anagram-finder
-Given a word, create an anagram finder that returns all of the possible anagrams for that word, not including itself.  If no anagrams exist, return an empty array.
+Given a word, create an anagram finder that returns an array of all of the possible anagrams for that word, not including itself.  If no anagrams exist, return an empty array.
 
 First you will need to download a dictionary to ensure that your anagrams are actual words.  A link to a open source Scrabble dictionary will be provided to confirm the anagrams you find are actually real words.
 
