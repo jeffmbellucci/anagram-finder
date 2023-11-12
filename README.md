@@ -1,5 +1,4 @@
-## anagram-finder
-
+## Anagram Finder Challenge
 
 An anagram is defined as a word, phrase, or name formed by rearranging the letters of another, such as "cinema", formed from "iceman".  Given a word, create an anagram finder that returns an array of all of the possible anagrams for that word, not including itself.  If no anagrams exist, return an empty array.
 
