@@ -5,6 +5,6 @@ An anagram is defined as a word, phrase, or name formed by rearranging the lette
 
 First you will need to download a dictionary to ensure that your anagrams are actual words.  A link to a open source Scrabble dictionary is provided below confirm the anagrams you find are actually real words.
 
-Feel free to preprocess that dictionary how you see fit to optimize your solution. All words in the dictionary are lowercase.
+Feel free to preprocess the dictionary how you see fit to optimize your solution. All words in the dictionary are lowercase.
 
 https://raw.githubusercontent.com/jeffmbellucci/anagram-finder/main/scrabble_dictionary.txt
