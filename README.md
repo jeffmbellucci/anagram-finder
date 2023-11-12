@@ -8,7 +8,7 @@ Given a word/string, create an anagram finder that returns an array of all of th
 
 - I used a brute force solution, so I'd have a working one quickly to create test cases, that I then checked against other sources, to be sure of their validity.  I am very curious to see if anyone can come with something more clever and optimal, perhaps with some sort of letter tree(s) traversal with DFS or BFS, or maybe some kind of NLP?
 
-- Brute force solutions are defitely acceptable, but they start to get slow quickly with longer words, which is why I kept the test case words relatively short.  I think my current solution is O(n!) which is admittedly brutal, and I am thinking about ways I might improve it. Even with brute force, the test cases should take no more than 2-3 seconds to complete. If people like this one, maybe I will make my next one fancier with RSpec...
+- Brute force solutions are definitely acceptable, but they start to get slow quickly with longer words, which is why I kept the test case words relatively short.  I think my current solution is O(n!) which is admittedly brutal, and I am thinking about ways I might improve it. Even with brute force, the test cases should take no more than 2-3 seconds to complete. If people like this one, maybe I will make my next one fancier with RSpec...
 
 - Here's the link if you choose to download the dictionary in your solution.
 https://raw.githubusercontent.com/jeffmbellucci/anagram-finder/main/scrabble_dictionary.txt
