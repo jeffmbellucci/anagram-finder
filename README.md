@@ -6,11 +6,11 @@ An anagram is defined as a word, phrase, or name formed by rearranging the lette
 
 - I used a brute force solution, so I'd have a working one quickly to create test cases, but I am curious to see if anyone can come with something more clever and optimal, perhaps with some sort of letter tree(s) traversal with DFS or BFS, or maybe even some kind of NLP.  
 
-- Brute force solutions will be accepted, but they definitely start to get slow quickly with longer words, which is why I kept the test case words relatively short. If people like this one, maybe I will make my next one fancier with RSpec...  Enjoy. :)
-
+- Brute force solutions will be accepted, but they definitely start to get slow quickly with longer words, which is why I kept the test case words relatively short. If people like this one, maybe I will make my next one fancier with RSpec...
 - Here's the link if you choose to download the dictionary in your solution.
 https://raw.githubusercontent.com/jeffmbellucci/anagram-finder/main/scrabble_dictionary.txt
 
-- You can run your solution at the command line with `ruby anagram_finder.rb` or natively in your IDE if you have a code runner, and it will tell you if it passes or fails.
+- You can run your solution at the command line with `ruby anagram_finder.rb`. or natively in your IDE if you have a code runner, and it will tell you if it passes or fails.  If you don't use file download in your solution, you can clone the repo so your File I/O can find the dictionary.  Enjoy. :)
+
 
 I'll push my solution for critique on Monday or so...
