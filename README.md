@@ -9,3 +9,5 @@ Feel free to preprocess the dictionary how you see fit to optimize your solution
 
 Here's the link if you choose to download it:
 https://raw.githubusercontent.com/jeffmbellucci/anagram-finder/main/scrabble_dictionary.txt
+
+I'll push my solution for critique on Monday or so...
