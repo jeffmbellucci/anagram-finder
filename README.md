@@ -14,6 +14,6 @@ https://raw.githubusercontent.com/jeffmbellucci/anagram-finder/main/scrabble_dic
 - You can run your solution at the command line with `ruby anagram_finder.rb`. or natively in your IDE if you have a code runner, and it will tell you if it passes or fails, like so:<br/><img width="382" alt="anagram test" src="https://github.com/jeffmbellucci/anagram-finder/assets/5009669/d505308a-eb67-4881-b27f-ade164faaf19"><br/>
 Or if it passes: <br/><img width="441" alt="anagram test passed" src="https://github.com/jeffmbellucci/anagram-finder/assets/5009669/0e92d65e-b72b-485b-86d3-0ba06ce04c1d">
 
-- If you don't use file download in your solution, you can clone the repo so your File I/O can find the dictionary.  Enjoy. :)
+- If you don't use file download in your solution, you can clone the repo so your File I/O can find the dictionary. You will see some pretty obscure words in the solutions, but I assure you that they are in the Scrabble Dictionary.  Enjoy. :)
 
 I'll push my solution for critique on Monday or so...
