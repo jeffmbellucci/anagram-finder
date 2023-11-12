@@ -4,7 +4,7 @@
 
 Given a word/string, create an anagram finder that returns an array of all of the possible anagrams strings for that word, not including itself.  If no anagrams exist, return an empty array.
 
-- The anagrams must be valid English words, so an open source Scrabble dictionary containing around 280K lowercased words is provided in this repo to confirm them.  You can open the dictionary with Ruby file I/O, but I found it ever so slightly more challenging if you download the dictionary first, instead of just opening it.  However, using an an HTTP request is not a requirement, and either solution type will be accepted by the basic tester included in the skeleton file.
+- The anagrams must be valid English words, so an open source Scrabble dictionary containing around 280K lowercased words is provided in this repo to confirm them.  You can open the dictionary with Ruby file I/O, but I found it ever so slightly harder if you download the dictionary first, instead of just opening it.  However, using an an HTTP request is not a requirement, and any solution type will be accepted by the basic tester included in the skeleton file.
 
 - I used a brute force solution, so I'd have a working one quickly to create test cases, that I then checked against other sources, to be sure of their validity.  I am very curious to see if anyone can come with something more clever and optimal, perhaps with some sort of letter tree(s) traversal with DFS or BFS, or maybe some kind of NLP?
 
