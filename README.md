@@ -11,4 +11,6 @@ An anagram is defined as a word, phrase, or name formed by rearranging the lette
 - Here's the link if you choose to download the dictionary in your solution.
 https://raw.githubusercontent.com/jeffmbellucci/anagram-finder/main/scrabble_dictionary.txt
 
+- You can run your solution at the command line with `ruby anagram_finder.rb` or natively in your IDE if you have a code runner, and it will tell you if it passes or fails.
+
 I'll push my solution for critique on Monday or so...
