@@ -18,7 +18,7 @@ def solution_tester
     anagrams.find('pester').sort == %w[peters petres preset].sort &&
     anagrams.find('present').sort == %w[penster repents serpent].sort
 
-  solved ? "All tests passed!" : "Test(s) failed."
+  solved ? 'All tests passed!' : 'Test(s) failed.'
 end
 
 puts solution_tester
