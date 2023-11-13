@@ -2,7 +2,7 @@
 
 "An anagram is defined as a word, phrase, or name formed by rearranging the letters of another, such as **_cinema_**, formed from **_iceman_**." - Oxford Languages  
 
-Given a word (string), create an anagram finder that returns an array of all of the possible anagrams strings for that word, not including itself.  If no anagrams exist, return an empty array.
+Given a word (string), create an anagram finder that returns an array of all the possible anagrams strings for that word, not including itself.  If no anagrams exist, return an empty array.
 
 - The anagrams must be valid English words, so an open source Scrabble dictionary containing around 280K lowercased words is provided in this repo to confirm them.  You can open the dictionary with Ruby file I/O, but I found it ever so slightly harder if you download the dictionary first, instead of just opening it.  However, using an an HTTP request is not a requirement, and any solution type will be accepted by the basic tester included in the skeleton file.
 
