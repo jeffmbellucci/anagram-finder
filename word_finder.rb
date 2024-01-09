@@ -2,32 +2,37 @@ class WordFinder
   attr_reader :letters, :dict, :candidates
 
   def initialize(options = {})
-    defaults = { letters: ('a'..'z').to_a.join, word_length: 5, key_letter_or_word: '', start_letter: '' }
+    defaults = { letters: '',
+      word_length: 4,
+      key_letter_or_word: '',
+      start_letters: '' }
     opts = defaults.merge(options)
+
     pp opts
     @letters = opts[:letters]
     @dict = File.readlines('./scrabble_dictionary.txt').map(&:chomp).map(&:downcase)
 
-    dict_length = @dict.length
-    puts "Dictionary length: #{dict_length}"
-    @candidates = opts[:letters].chars.permutation(opts[:word_length]).map(&:join)
+    full_dict_length = @dict.length
+    puts "\nFull dictionary length: #{full_dict_length} words."
+    @candidates = opts[:letters].chars.permutation(opts[:word_length]).map(&:join).uniq
 
+    puts "Candidates (#{candidates.length} words) are #{percentage(candidates.length, full_dict_length)}% of full dictionary."
     @dict.select! { |word| word.length == opts[:word_length] &&
       word.include?(opts[:key_letter_or_word]) &&
-      (word[0] == opts[:start_letter] || options[:start_letter].empty?)}
+      (word[0..opts[:start_letters].length - 1] == opts[:start_letters] ||
+      options[:start_letters].empty?)}
 
-    puts "Dictionary is now #{100.0 - percentage(dict.length, dict_length)}% shorter with #{opts[:word_length]} letters."
+    puts "Remaining candidates (#{dict.length} words) are now #{100.0 - percentage(dict.length, full_dict_length)}% shorter than full dictionary."
+    puts  "Using '#{opts[:start_letters]}' to start and containing '#{opts[:key_letter_or_word]}' using only '#{letters.split('').join(',')}'."
   end
 
   def find
-    unique_candidates = candidates.uniq
-    puts "number of candidate words: #{@candidates.length}"
-    pp unique_candidates.select { |word| dict.include?(word) }
+    pp candidates.select { |word| dict.include?(word) }
   end
 
   private
 
-  def percentage(a, b, decimal_places = 3)
+  def percentage(a, b, decimal_places = 4)
     (a.to_f/ b.to_f * 100.0).round(decimal_places)
   end
 
@@ -44,4 +49,11 @@ class WordFinder
   end
 end
 
-WordFinder.new(key_letter_or_word: 'zz', start_letter: '').find
+WordFinder.new(
+  {
+    key_letter_or_word: '',
+    start_letters: 'la',
+    letters: 'zaltionzaltionlt',
+    word_length:7
+  }
+).find
