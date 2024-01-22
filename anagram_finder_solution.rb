@@ -29,4 +29,4 @@ def solution_tester
   solved ? 'All tests passed!' : 'Test(s) failed.'
 end
 
-puts solution_tester
+puts Anagrams.new.find('acid')
