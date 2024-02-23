@@ -40,66 +40,15 @@ class WordFinder
     (a.to_f / b.to_f * 100.0).round(decimal_places)
   end
 
-  def substrings(str, length = 4)
-    output = []
-    0.upto(str.length - 1) do |i|
-      i.upto(str.length - 1) { |j| output << str[i..j] }
-    end
-    output.select { |str| str == length }.uniq
-  end
-
   def factorial(n)
     (1..n).inject(:*)
   end
 end
 
 WordFinder.new(
-  key_letter_or_word: 'c',
-  start_letters: 'in',
-  letters: 'nomadicnomadicnomadic',
+  key_letter_or_word: 'b',
+  start_letters: 'band',
+  letters: 'bundacebundacean',
   word_length: 7
 ).find
 
-
-# # create analgorithm that takes in a string and returns all possible anagrams using thescrable_dictionary.txt file in this same directory, and returns an array of all possible anagrams, or an empty array if none exist, avoid factorial time complexity
-# def load_dictionary(file_path)
-#   dictionary = Hash.new { |hash, key| hash[key] = [] }
-
-#   File.foreach(file_path) do |line|
-#     word = line.strip.downcase
-#     sorted_word = word.chars.sort.join
-#     dictionary[sorted_word] << word
-#   end
-
-#   dictionary
-# end
-
-# def find_scrabble_words(letters, dictionary, word_length)
-#   possible_words = []
-
-#   letters.chars.permutation(word_length) do |permutation|
-#     sorted_permutation = permutation.sort.join
-#     possible_words.concat(dictionary[sorted_permutation])
-#   end
-
-#   possible_words.uniq.select { |word| word.length == word_length }
-# end
-
-# # Load the dictionary from the file
-# scrabble_dictionary = load_dictionary("scrabble_dictionary.txt")
-
-# # Get input from the user
-# puts "Enter a set of letters to find Scrabble words:"
-# user_letters = gets.chomp
-
-# puts "Enter the desired word length:"
-# word_length = gets.chomp.to_i
-
-# # Find and display Scrabble words of the specified length
-# scrabble_words = find_scrabble_words(user_letters, scrabble_dictionary, word_length)
-
-# if scrabble_words.empty?
-#   puts "No Scrabble words of length #{word_length} found."
-# else
-#   puts "Scrabble Words of length #{word_length}: #{scrabble_words.join(', ')}"
-# end
