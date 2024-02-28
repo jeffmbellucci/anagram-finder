@@ -21,17 +21,19 @@ class WordFinder
     @dict_hash.select! do |word|
       word.length == opts[:word_length] &&
         word.include?(opts[:key_letter_or_word]) &&
-        (word[0..opts[:start_letters].length - 1] == opts[:start_letters] ||
-        options[:start_letters].empty?)
+        ((word[0..opts[:start_letters].length - 1] == opts[:start_letters] ||
+        options[:start_letters].empty?)) &&
+((word[-opts[:end_letters].length..-1] == opts[:end_letters] ||
+        options[:start_letters].empty?))
     end
 
     puts "Remaining candidates (#{dict_hash.length} words) are now #{100.0 - percentage(dict_hash.length,
-                                                                                   full_dict_length)}% shorter than full dictionary."
+                                                                                        full_dict_length)}% shorter than full dictionary."
     puts "Using '#{opts[:start_letters]}' to start and containing '#{opts[:key_letter_or_word]}' using only '#{letters.split('').join(',')}'."
   end
 
   def find
-   pp candidates.select { |word| dict_hash[word] }
+    pp(candidates.select { |word| dict_hash[word] })
   end
 
   private
@@ -46,9 +48,9 @@ class WordFinder
 end
 
 WordFinder.new(
-  key_letter_or_word: 'b',
-  start_letters: 'band',
-  letters: 'bundacebundacean',
-  word_length: 7
+  key_letter_or_word: 'n',
+  start_letters: 's',
+  end_letters: 'e',
+  letters: 'spoineh',
+  word_length: 5
 ).find
-
