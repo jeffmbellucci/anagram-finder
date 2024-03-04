@@ -53,12 +53,12 @@ results = WordFinder.new(
   key_letter_or_word: '',
   start_letters: '',
   end_letters: '',
-  letters: 'fprainlsbhmwudyvz',
+  letters: 'abcdefghijklnopqrstuvwxyz',
   word_length: 5
 ).find
 
 puts "Possibilities:\n"
-puts results #.filter_map { |word| word if word[1] == 'r' && word[-1] == 'n' && word[-2] == 'a' }
+puts results.filter_map { |word| word if word[0] == 's' && word[-3..-1] == 'ate' }
 
 
 # Copilot advice:

@@ -1,5 +1,3 @@
-require 'set'
-
 class TrieNode
   attr_accessor :children, :is_word
 
@@ -46,7 +44,7 @@ class Trie
 end
 
 class WordFinder
-  attr_reader :letters, :trie, :candidates, :word_length, :dict
+  attr_reader :letters, :dict, :dict_trie, :candidates, :word_length
 
   def initialize(options = {})
     defaults = { letters: '',
@@ -55,32 +53,36 @@ class WordFinder
                  start_letters: '' }
     opts = defaults.merge(options)
     @letters = opts[:letters]
-    @trie = Trie.new
-    @dict = Set.new(File.readlines('./scrabble_dictionary.txt').map(&:chomp).map(&:downcase))
+    @dict = File.readlines('./scrabble_dictionary.txt').map(&:chomp).map(&:downcase)
+    @dict_trie = Trie.new
+    @dict.each { |word| @dict_trie.insert(word) }
 
     full_dict_length = @dict.length
 
     @word_length = opts[:word_length].is_a?(Integer) ? opts[:word_length] : letters.length
 
     puts "\nFull dictionary length: #{full_dict_length} words."
-
-    @candidates = letters.chars.permutation(word_length).map(&:join).uniq
-
-    puts "Candidates (#{candidates.length} words) are #{percentage(candidates.length, full_dict_length)}% of full dictionary."
-
-    @dict.select! do |word|
-      word.length == word_length &&
-        word.include?(opts[:key_letter_or_word]) &&
-        (word[0..opts[:start_letters].length - 1] == opts[:start_letters] || opts[:start_letters].empty?) &&
-        (word[-opts[:end_letters].length..-1] == opts[:end_letters] || opts[:start_letters].empty?)
-    end
-
-    puts "Remaining candidates (#{dict.length} words) are now #{100.0 - percentage(dict.length, full_dict_length)}% shorter than full dictionary."
     puts "Using '#{opts[:start_letters]}' to start and containing '#{opts[:key_letter_or_word]}' using only '#{letters.split('').join(',')}'."
+    @dict.select! { |word| word.length == word_length }
+
+    #only select words that contain the letters
+    @dict.select! { |word| word.chars.all? { |letter| letters.include?(letter) } }
+    # words that start with the start letters using starts_with
+    @dict.select! { |word| dict_trie.starts_with(opts[:start_letters]) || opts[:start_letters].empty? }
+
+    @dict.select! { |word| word[0..opts[:start_letters].length - 1] == opts[:start_letters] || opts[:start_letters].empty? }
+    # words that contain the key letter or word
+    @dict.select! { |word| word.include?(opts[:key_letter_or_word]) || opts[:key_letter_or_word].empty? }
+    # words that end with the end letters
+    @dict.select! { |word| word[-opts[:end_letters].length..-1] == opts[:end_letters] || opts[:end_letters].empty? }
+
+    puts "Dictionary length after filtering: #{dict.length} words."
+    puts "Remaining candidates (#{dict.length} words) are now #{100.0 - percentage(dict.length, full_dict_length)}% shorter than full dictionary."
   end
 
   def find
-    candidates.select { |word| trie.search(word) }
+    puts "Possibilities are:\n"
+    @dict
   end
 
   private
@@ -90,12 +92,13 @@ class WordFinder
   end
 end
 
-pp results = WordFinder.new(
-  key_letter_or_word: 'p',
-  start_letters: 's',
+pp WordFinder.new(
+  key_letter_or_word: 'h',
+  start_letters: 'n',
   end_letters: '',
-  letters: 'fpgraoinls',
-  word_length:4
+  letters: 'elphant',
+  word_length: 8
 ).find
 
-pp results.filter_map { |word| word if word.include?('a') && word[1] == 'r' && word[2] != 'a' && word[3] != 's' }
+
+
