@@ -62,18 +62,20 @@ class WordFinder
 
     puts "\nFull dictionary length: #{full_dict_length} words."
     puts "Using '#{opts[:start_letters]}' to start and containing '#{opts[:key_letter_or_word]}' using only '#{letters.split('').join(',')}'."
-    @dict.select! { |word| word.length == word_length }
-    # only select words that contain the letters
-    @dict.select! { |word| word.chars.all? { |letter| letters.include?(letter) } }
-    # words that start with the start letters using starts_with
-    @dict.select! { |word| dict_trie.starts_with(opts[:start_letters]) || opts[:start_letters].empty? }
-    # words that contain the key letter or word
-    @dict.select! { |word| word.include?(opts[:key_letter_or_word]) || opts[:key_letter_or_word].empty? }
-    # words that end with the end letters
-    @dict.select! { |word| word[-opts[:end_letters].length..-1] == opts[:end_letters] || opts[:end_letters].empty? }
 
-    puts "Dictionary length after filtering: #{dict.length} words."
-    puts "Remaining candidates (#{dict.length} words) are now #{100.0 - percentage(dict.length, full_dict_length)}% shorter than full dictionary."
+    # first filter the dictionary to only include words of the correct length
+    @dict.select! do |word| word.length == word_length &&
+      # only select words that contain the letters
+      word.chars.all? { |letter| letters.include?(letter) } &&
+      # only select words that start with the start letters using starts_with
+      (dict_trie.starts_with(opts[:start_letters]) || opts[:start_letters].empty?) &&
+      # words that contain the key letter or word
+      (word.include?(opts[:key_letter_or_word]) || opts[:key_letter_or_word].empty?)  &&
+      # words that end with the end letters
+      (word[-opts[:end_letters].length..-1] == opts[:end_letters] || opts[:end_letters].empty?)
+    end
+
+    puts "Remaining candidates (#{dict.length} words after filter) are now #{100.0 - percentage(dict.length, full_dict_length)}% shorter than full dictionary."
   end
 
   def find
