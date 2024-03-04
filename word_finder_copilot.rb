@@ -64,13 +64,10 @@ class WordFinder
     puts "\nFull dictionary length: #{full_dict_length} words."
     puts "Using '#{opts[:start_letters]}' to start and containing '#{opts[:key_letter_or_word]}' using only '#{letters.split('').join(',')}'."
     @dict.select! { |word| word.length == word_length }
-
-    #only select words that contain the letters
+    # only select words that contain the letters
     @dict.select! { |word| word.chars.all? { |letter| letters.include?(letter) } }
     # words that start with the start letters using starts_with
     @dict.select! { |word| dict_trie.starts_with(opts[:start_letters]) || opts[:start_letters].empty? }
-
-    @dict.select! { |word| word[0..opts[:start_letters].length - 1] == opts[:start_letters] || opts[:start_letters].empty? }
     # words that contain the key letter or word
     @dict.select! { |word| word.include?(opts[:key_letter_or_word]) || opts[:key_letter_or_word].empty? }
     # words that end with the end letters
@@ -94,8 +91,8 @@ end
 
 pp WordFinder.new(
   key_letter_or_word: 'h',
-  start_letters: 'n',
-  end_letters: '',
+  start_letters: 'e',
+  end_letters: 't',
   letters: 'elphant',
   word_length: 8
 ).find
