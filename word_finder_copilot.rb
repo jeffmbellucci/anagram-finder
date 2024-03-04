@@ -44,7 +44,7 @@ class WordFinder
 end
 
 pp WordFinder.new(
-  key_letter_or_word: 'ph',
+  key_letter_or_word: 'h',
   start_letters: 'e',
   end_letters: 's',
   letters: 'elphants',
