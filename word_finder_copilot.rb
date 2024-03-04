@@ -48,7 +48,7 @@ class WordFinder
 
   def initialize(options = {})
     defaults = { letters: '',
-                 word_length: 4,
+                 word_length: '',
                  key_letter_or_word: '',
                  start_letters: '' }
     opts = defaults.merge(options)
@@ -95,7 +95,7 @@ pp WordFinder.new(
   start_letters: '',
   end_letters: '',
   letters: 'elphants',
-  word_length: 10
+  word_length:''
 ).find
 
 
