@@ -58,7 +58,6 @@ class WordFinder
     @dict.each { |word| @dict_trie.insert(word) }
 
     full_dict_length = @dict.length
-
     @word_length = opts[:word_length].is_a?(Integer) ? opts[:word_length] : letters.length
 
     puts "\nFull dictionary length: #{full_dict_length} words."
@@ -91,10 +90,10 @@ end
 
 pp WordFinder.new(
   key_letter_or_word: 'h',
-  start_letters: 'e',
-  end_letters: 't',
-  letters: 'elphant',
-  word_length: 8
+  start_letters: '',
+  end_letters: '',
+  letters: 'elphants',
+  word_length: 10
 ).find
 
 
