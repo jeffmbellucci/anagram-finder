@@ -1,20 +1,24 @@
 class WordFinder
-  attr_reader :letters, :dict, :dict_trie, :candidates, :word_length
+  attr_reader :letters, :dict, :dict_trie, :candidates, :word_length, :key_letter_or_word
 
   def initialize(options = {})
     defaults = { letters: '',
                  word_length: '',
                  key_letter_or_word: '',
-                 start_letters: '' }
+                 start_letters: '',
+                 end_letters: ''}
     opts = defaults.merge(options)
     @letters = opts[:letters]
+    @word_length = opts[:word_length]
+    @key_letter_or_word = opts[:key_letter_or_word]
+
     @dict = File.readlines('./scrabble_dictionary.txt').map(&:chomp).map(&:downcase)
 
     full_dict_length = @dict.length
     @word_length = opts[:word_length].is_a?(Integer) ? opts[:word_length] : letters.length
 
-    puts "\nFull dictionary length: #{full_dict_length} words."
-    puts "Using '#{opts[:start_letters]}' to start and containing '#{opts[:key_letter_or_word]}' using only '#{letters.split('').join(',')}'."
+    # puts "\nFull dictionary length: #{full_dict_length} words."
+    # puts "Using '#{opts[:start_letters]}' to start and containing '#{opts[:key_letter_or_word]}' using only '#{letters.split('').join(',')}'."
 
     # first filter the dictionary to only include words of the correct length
     @dict.select! do |word| word.length == word_length &&
@@ -23,7 +27,7 @@ class WordFinder
       # only select words that start with the start letters or are empty
       (word[0..opts[:start_letters].length - 1] == opts[:start_letters] || opts[:start_letters].empty?) &&
       # words that contain the key letter or word
-      (word.include?(opts[:key_letter_or_word]) || opts[:key_letter_or_word].empty?)  &&
+      (word.include?(opts[:key_letter_or_word]) || opts[:key_letter_or_word].empty?) &&
       # words that end with the end letters
       (word[-opts[:end_letters].length..-1] == opts[:end_letters] || opts[:end_letters].empty?)
     end
@@ -32,8 +36,8 @@ class WordFinder
   end
 
   def find
-    puts "Possibilities are:\n"
-    @dict
+    puts "Possibilities for #{word_length} words are:\n"
+    pp @dict
   end
 
   private
@@ -43,13 +47,22 @@ class WordFinder
   end
 end
 
-pp WordFinder.new(
-  key_letter_or_word: 'h',
-  start_letters: 'e',
-  end_letters: 's',
-  letters: 'elphants',
-  word_length:9
-).find
+
+def spelling_bee_solver(letters, key_letter_or_word)
+  15.downto(4).each do |word_length|
+    WordFinder.new(letters:, word_length:, key_letter_or_word:).find
+  end
+end
+
+spelling_bee_solver('mailrod', 'i')
+
+# WordFinder.new(
+#   key_letter_or_word: 'g',
+#   start_letters: '',
+#   end_letters: '',
+#   letters: 'cogenta',
+#   word_length: 6
+# ).find
 
 
 
