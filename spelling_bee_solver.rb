@@ -54,7 +54,7 @@ def spelling_bee_solver(letters, key_letter_or_word)
   end
 end
 
-spelling_bee_solver('mailrod', 'i')
+spelling_bee_solver('tyranic', 'c')
 
 # WordFinder.new(
 #   key_letter_or_word: 'g',
