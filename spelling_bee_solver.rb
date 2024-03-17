@@ -4,7 +4,7 @@ class WordFinder
   def initialize(letters:, word_length:, key_letter_or_word:, start_letters:, end_letters:)
     @dict = File.readlines('./scrabble_dictionary.txt').map(&:chomp).map(&:downcase)
     @letters = letters
-    @word_length = word_length
+    @word_length = word_length.is_a?(Integer) ? word_length : 15
     @key_letter_or_word = key_letter_or_word
     @start_letters = start_letters
     @end_letters = end_letters
@@ -15,7 +15,8 @@ class WordFinder
   end
 
   def find
-    @dict.select! do |word| word.length == word_length &&
+    dict.select do |word|
+      (word.length == word_length) &&
       # only select words that contain the letters
       word.chars.all? { |letter| letters.include?(letter) } &&
       # only select words that start with the start letters or are empty
@@ -27,13 +28,19 @@ class WordFinder
     end
   end
 
+  # Return only the words that contain all the letters, not working yet
+ #
+
+  def anagrams
+    dict.select { |word| word.chars.sort.join == letters.chars.sort.join } - [letters]
+  end
+
   private
 
   def percentage(a, b, decimal_places = 4)
     (a.to_f / b.to_f * 100.0).round(decimal_places)
   end
 end
-
 
 def spelling_bee_solver(letters:, word_length:, key_letter_or_word:, start_letters:, end_letters:)
   output = []
@@ -43,8 +50,16 @@ def spelling_bee_solver(letters:, word_length:, key_letter_or_word:, start_lette
   output.flatten
 end
 
-pp spelling_bee_solver(letters: 'confirm', key_letter_or_word: 'o', word_length: 6, start_letters: 'c', end_letters: 'n')
+def all_panagrams(letters:, word_length:, key_letter_or_word:, start_letters:, end_letters:)
+  output = []
+  word_length.downto(7).each do |word_length|
+    output << WordFinder.new(letters: letters, word_length:, key_letter_or_word:, start_letters:, end_letters:).panagrams
+  end
+  output.flatten
+end
 
+#pp all_panagrams(letters: 'natiozl' , word_length: 15, key_letter_or_word: '', start_letters: '', end_letters: '')
+#pp WordFinder.new(letters: 'laster' , word_length: '', key_letter_or_word: '', start_letters: '', end_letters: '').anagrams
 
-
+pp spelling_bee_solver(letters: 'confirm', key_letter_or_word: 'o', word_length: 4, start_letters: '', end_letters: '')
 
