@@ -50,16 +50,16 @@ def spelling_bee_solver(letters:, word_length:, key_letter_or_word:, start_lette
   output.flatten
 end
 
+# not currently working, but it was at one point, will need to check git history
 def all_panagrams(letters:, word_length:, key_letter_or_word:, start_letters:, end_letters:)
   output = []
   word_length.downto(7).each do |word_length|
-    output << WordFinder.new(letters: letters, word_length:, key_letter_or_word:, start_letters:, end_letters:).panagrams
+    output << WordFinder.new(letters: letters, word_length:, key_letter_or_word:, start_letters:, end_letters:).anagrams
   end
-  output.flatten
+  output
 end
 
-#pp all_panagrams(letters: 'natiozl' , word_length: 15, key_letter_or_word: '', start_letters: '', end_letters: '')
-#pp WordFinder.new(letters: 'laster' , word_length: '', key_letter_or_word: '', start_letters: '', end_letters: '').anagrams
+pp WordFinder.new(letters: 'laster' , word_length: '', key_letter_or_word: '', start_letters: '', end_letters: '').anagrams
 
-pp spelling_bee_solver(letters: 'confirm', key_letter_or_word: 'o', word_length: 4, start_letters: '', end_letters: '')
+pp spelling_bee_solver(letters: 'confirm', key_letter_or_word: 'o', word_length: 15, start_letters: '', end_letters: '')
 
