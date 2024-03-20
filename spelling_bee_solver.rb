@@ -28,9 +28,7 @@ class WordFinder
     end
   end
 
-  # Return only the words that contain all the letters, not working yet
- #
-
+  # Return only the words that contain all the letter
   def anagrams
     dict.select { |word| word.chars.sort.join == letters.chars.sort.join } - [letters]
   end
