@@ -4,7 +4,7 @@ class WordFinder
   def initialize(letters:, word_length:, key_letter_or_word:, start_letters:, end_letters:)
     @dict = File.readlines('./scrabble_dictionary.txt').map(&:chomp).map(&:downcase)
     @letters = letters
-    @word_length = word_length.is_a?(Integer) ? word_length : 15
+    @word_length = word_length.is_a?(Integer) ? word_length.to_i : 15
     @key_letter_or_word = key_letter_or_word
     @start_letters = start_letters
     @end_letters = end_letters
@@ -28,6 +28,14 @@ class WordFinder
     end
   end
 
+def wordle_possible
+  output = find.select do |word|
+    key_letter_or_word.chars.all? { |letter| word.include?(letter) } &&
+    word.length == 5
+  end
+  output
+end
+
   # Return only the words that contain all the letter
   def anagrams
     dict.select { |word| word.chars.sort.join == letters.chars.sort.join } - [letters]
@@ -40,8 +48,8 @@ class WordFinder
   end
 end
 
-def spelling_bee_solver(letters:, word_length:, key_letter_or_word:, start_letters:, end_letters:)
-  output = []
+def spelling_bee_solver(letters:, word_length: 15, key_letter_or_word:, start_letters:, end_letters:)
+ output = []
   word_length.downto(4).each do |word_length|
    output << WordFinder.new(letters:, word_length:, key_letter_or_word:, start_letters:, end_letters:).find
   end
@@ -57,7 +65,8 @@ def all_panagrams(letters:, word_length:, key_letter_or_word:, start_letters:, e
   output
 end
 
-pp WordFinder.new(letters: 'laster' , word_length: '', key_letter_or_word: '', start_letters: '', end_letters: '').anagrams
+#pp WordFinder.new(letters: 'laster' , word_length: '', key_letter_or_word: '', start_letters: '', end_letters: '').anagrams
 
-pp spelling_bee_solver(letters: 'confirm', key_letter_or_word: 'o', word_length: 15, start_letters: '', end_letters: '')
+pp spelling_bee_solver(letters: 'bloming', key_letter_or_word: 'b', word_length: 15, start_letters: '', end_letters: '')
 
+pp WordFinder.new(letters: 'aroqwyupfghjkzxvm', word_length: 5, key_letter_or_word: 'oar', start_letters: '', end_letters: '').wordle_possible
