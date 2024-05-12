@@ -70,6 +70,7 @@ class SpellingBeeSolver
       @find_all = gets.chomp.upcase
     end
 
+    # Allow the user to input the word length, start letters, and end letters
     if @find_all == 'N'
       puts "Input the maximum word length you want to find, or hit 'Enter' for the default (15 letters):"
       @word_length = gets.chomp.to_i
@@ -79,26 +80,9 @@ class SpellingBeeSolver
       puts 'Enter a suffix or last letter for the words (enter blank to skip):'
       @end_letters = gets.chomp.downcase || ''
 
-      # puts 'Would you like to see all available English words(Y), or only the most common?(N) (Y/N):'
-      # @all_words = gets.chomp.upcase
-      # until (@all_words == 'Y' || @all_words == 'N')
-      #   puts 'Invalid input, please enter (Y/N).'
-      #   @all_words = gets.chomp.upcase
-      # end
-      # @all_words = @all_words == 'Y' ? true : false
-
       @output = spelling_bee_solver(letters: , word_length: , key_letter_or_word: , start_letters: , end_letters: , all_words: )
     else
-
-      # puts 'Would you like to see all available English words(Y), or only the most common?(N) (Y/N):'
-      # @all_words = gets.chomp.upcase
-
-      # until (@all_words == 'Y' || @all_words == 'N')
-      #   puts 'Invalid input, please enter (Y/N).'
-      #   @all_words = gets.chomp.upcase
-      # end
-      # @all_words = @all_words == 'Y' ? true : false
-
+      # Output all the words
       @output = spelling_bee_solver(letters: , word_length: 15 , key_letter_or_word: , start_letters: '' , end_letters: '' , all_words: )
     end
 
@@ -149,7 +133,7 @@ class SpellingBeeSolver
     output << WordFinder.new(letters:, word_length:, key_letter_or_word:, start_letters:, end_letters:).find
     end
     # order the words by the frequency of the word in the English language or infinite if not found
-    # only select words that are in the frequency hash
+    # only select words that are in the frequency hash if all_words is false, otherwise return all words sorted by frequency
     entire_output = output.flatten.sort_by { |word| frequency[word] || 0 }.reverse.map(&:upcase)
     limited_output = output.flatten.select { |word| frequency[word] }.sort_by { |word| frequency[word] }.reverse.map(&:upcase)
     all_words ? entire_output : limited_output
