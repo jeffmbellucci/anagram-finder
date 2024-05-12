@@ -95,7 +95,9 @@ class SpellingBeeSolver
     print "Jeff is working hard to find those words"; 15.times{ sleep 0.1; print '.' }; puts "\n"
     sleep(0.3)
     puts "Here are the words that Jeff found based on your inputs, ranked in order of most common to least:\n\n"
-    puts output
+    puts "Sorry, I couldn't find any words that meet your criteria." if @output.empty?
+    puts output if !@output.empty?
+
     if @show_smile == 'Y'
       sleep(0.2)
       puts "\nHere's that smile for you!\n"
@@ -119,6 +121,21 @@ class SpellingBeeSolver
     puts 'And at very least, he is sorta clever.'
     sleep(0.2)
     puts 'And he really likes you.'
+
+    puts "\nIf your word is not in the list we can run an expanded search, would you like to do that? (Y/N):"
+      @expanded = gets.chomp.upcase
+
+      until (@expanded == 'Y' || @expanded == 'N')
+        puts 'Invalid input, please enter (Y/N).'
+        @expanded = gets.chomp.upcase
+      end
+
+    puts "\n"
+    if @expanded == 'Y'
+      puts "The expanded search was unable to find any more words." if (@entire_output - @limited_output).empty?
+      puts @entire_output - @limited_output
+    end
+    puts "Thanks for playing!" if @expanded == 'N'
   end
 
   # Main method to solve the spelling bee puzzle, pass false as the last argument to return only the words in the frequency hash
@@ -132,9 +149,9 @@ class SpellingBeeSolver
     end
     # order the words by the frequency of the word in the English language or infinite if not found
     # only select words that are in the frequency hash if all_words is false, otherwise return all words sorted by frequency
-    entire_output = output.flatten.sort_by { |word| frequency[word] || 0 }.reverse.map(&:upcase)
-    limited_output = output.flatten.select { |word| frequency[word] }.sort_by { |word| frequency[word] }.reverse.map(&:upcase)
-    all_words ? entire_output : limited_output
+    @entire_output = output.flatten.sort_by { |word| frequency[word] || 0 }.reverse.map(&:upcase)
+    @limited_output = output.flatten.select { |word| frequency[word] }.sort_by { |word| frequency[word] }.reverse.map(&:upcase)
+    all_words ? @entire_output : @limited_output
   end
 end
 
@@ -181,10 +198,10 @@ def all_panagrams(letters:, word_length:, key_letter_or_word:, start_letters:, e
   output
 end
 
+# Execute the SpellingBeeSolver
+SpellingBeeSolver.new
 
-#SpellingBeeSolver.new
-
-pp WordFinder.new(letters: 'playome' , word_length: '', key_letter_or_word: '', start_letters: '', end_letters: '').anagrams
+#pp WordFinder.new(letters: 'playome' , word_length: '', key_letter_or_word: '', start_letters: '', end_letters: '').anagrams
 
 #pp WordFinder.new(letters: 'qwertyuodfghjklzxvm', word_length: 5, key_letter_or_word: '', start_letters: '', end_letters: '').find.select { |word| word.include?('r') && word.include?('e') && word.include?('t') && word[1] != 'r' && word[2] != 'r' && word[3] == 'e'  && word[4] != 'e' && word[4] != 't'}
 
