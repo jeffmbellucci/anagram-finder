@@ -10,8 +10,6 @@ class WordFinder
     @key_letter_or_word = key_letter_or_word
     @start_letters = start_letters
     @end_letters = end_letters
-    # puts "\nFull dictionary length: #{full_dict_length} words."
-    # puts "Using '#{opts[:start_letters]}' to start and containing '#{opts[:key_letter_or_word]}' using only '#{letters.split('').join(',')}'."
   end
 
   def find
@@ -116,7 +114,7 @@ class SpellingBeeSolver
       puts "\nWho doesn't like smiles? ;-)"
       "¯¯\\_(ツ)_/¯¯".chars.each { |char| print char; sleep(0.1) }; puts "\n"
     end
-    puts "\n Anyway, Jeff always tries his best, and he would be happy to help you find more words if you like."
+    puts "\nAnyway, Jeff always tries his best, and he would be happy to help you find more words if you like."
     sleep(0.2)
     puts 'And at very least, he is sorta clever.'
     sleep(0.2)
@@ -139,6 +137,9 @@ class SpellingBeeSolver
     all_words ? entire_output : limited_output
   end
 end
+
+
+
 
 class WordleSolver
 
@@ -180,11 +181,10 @@ def all_panagrams(letters:, word_length:, key_letter_or_word:, start_letters:, e
   output
 end
 
-SpellingBeeSolver.new
 
-#pp WordFinder.new(letters: 'playome' , word_length: '', key_letter_or_word: '', start_letters: '', end_letters: '').anagrams
+#SpellingBeeSolver.new
 
-#spelling_bee_solver(letters: 'playome', key_letter_or_word: 'a', word_length: 15, start_letters: '', end_letters: '')
+pp WordFinder.new(letters: 'playome' , word_length: '', key_letter_or_word: '', start_letters: '', end_letters: '').anagrams
 
 #pp WordFinder.new(letters: 'qwertyuodfghjklzxvm', word_length: 5, key_letter_or_word: '', start_letters: '', end_letters: '').find.select { |word| word.include?('r') && word.include?('e') && word.include?('t') && word[1] != 'r' && word[2] != 'r' && word[3] == 'e'  && word[4] != 'e' && word[4] != 't'}
 
