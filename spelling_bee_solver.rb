@@ -57,12 +57,9 @@ class SpellingBeeSolver
     # Get the mandatory letter
     puts 'Input the center letter:'
     @key_letter_or_word = gets.chomp.downcase
-    @valid = letters.include?(@key_letter_or_word) && @key_letter_or_word.length == 1
-
-    until (@valid)
+    until (letters.include?(@key_letter_or_word) && @key_letter_or_word.length == 1)
       puts 'Invalid input, please enter a single letter that is one the 7 letters you entered.'
       @key_letter_or_word = gets.chomp.downcase
-      @valid = letters.include?(@key_letter_or_word) && @key_letter_or_word.length == 1
     end
 
     puts "Would you like to see all the possible words (Y), or would you like a more refined search?(N) (Y/N):"
@@ -77,31 +74,31 @@ class SpellingBeeSolver
       puts "Input the maximum word length you want to find, or hit 'Enter' for the default (15 letters):"
       @word_length = gets.chomp.to_i
       @word_length = @word_length == 0 ? 15 : @word_length
-      puts 'Input the first letter or prefix of the words you want find (if any):'
+      puts 'Input the first letter or prefix of the words you want find (enter blank to skip):'
       @start_letters = gets.chomp.downcase || ''
-      puts 'Enter a suffix or last letter for the words (if any):'
+      puts 'Enter a suffix or last letter for the words (enter blank to skip):'
       @end_letters = gets.chomp.downcase || ''
 
-      puts 'Would you like to see all available English words(Y), or only the most common?(N) (Y/N):'
-      @all_words = gets.chomp.upcase
-      until (@all_words == 'Y' || @all_words == 'N')
-        puts 'Invalid input, please enter (Y/N).'
-        @all_words = gets.chomp.upcase
-      end
+      # puts 'Would you like to see all available English words(Y), or only the most common?(N) (Y/N):'
+      # @all_words = gets.chomp.upcase
+      # until (@all_words == 'Y' || @all_words == 'N')
+      #   puts 'Invalid input, please enter (Y/N).'
+      #   @all_words = gets.chomp.upcase
+      # end
+      # @all_words = @all_words == 'Y' ? true : false
 
-      @all_words = @all_words == 'Y' ? true : false
       @output = spelling_bee_solver(letters: , word_length: , key_letter_or_word: , start_letters: , end_letters: , all_words: )
     else
-      # Case where the user wants to find all possible words
-      puts 'Would you like to see all available English words(Y), or only the most common?(N) (Y/N):'
-      @all_words = gets.chomp.upcase
 
-      until (@all_words == 'Y' || @all_words == 'N')
-        puts 'Invalid input, please enter (Y/N).'
-        @all_words = gets.chomp.upcase
-      end
+      # puts 'Would you like to see all available English words(Y), or only the most common?(N) (Y/N):'
+      # @all_words = gets.chomp.upcase
 
-      @all_words = @all_words == 'Y' ? true : false
+      # until (@all_words == 'Y' || @all_words == 'N')
+      #   puts 'Invalid input, please enter (Y/N).'
+      #   @all_words = gets.chomp.upcase
+      # end
+      # @all_words = @all_words == 'Y' ? true : false
+
       @output = spelling_bee_solver(letters: , word_length: 15 , key_letter_or_word: , start_letters: '' , end_letters: '' , all_words: )
     end
 
@@ -115,7 +112,7 @@ class SpellingBeeSolver
 
     print "Jeff is working hard to find those words"; 15.times{ sleep 0.1; print '.' }; puts "\n"
     sleep(0.3)
-    puts "Here are the words that Jeff found based on your inputs:\n\n"
+    puts "Here are the words that Jeff found based on your inputs, ranked in order of most common to least:\n\n"
     puts output
     if @show_smile == 'Y'
       sleep(0.2)
@@ -143,7 +140,7 @@ class SpellingBeeSolver
   end
 
   # Main method to solve the spelling bee puzzle, pass false as the last argument to return only the words in the frequency hash
-  def spelling_bee_solver(letters:, word_length: 15, key_letter_or_word:, start_letters:, end_letters:, all_words: true)
+  def spelling_bee_solver(letters:, word_length: 15, key_letter_or_word:, start_letters:, end_letters:, all_words: false)
     output = []
     # open word_frequency.csv and return as a hash with the words as keys and the frequency as integer values
     frequency = CSV.read('./word_frequency.csv').to_h.transform_values(&:to_i)
@@ -158,6 +155,37 @@ class SpellingBeeSolver
     all_words ? entire_output : limited_output
   end
 end
+
+class WordleSolver
+
+  attr_reader :possible_letters
+
+  def initialize
+    @possible_letters = (a..z).to_a
+  end
+
+  def solve
+    6.times do
+      puts "Enter your 5-letter guess:"
+      word = gets.chomp.downcase
+      until (@letters.length == 7)
+        puts 'That is not 5 letters, please enter 5 letters.'
+        @letters = gets.chomp.downcase
+      end
+
+      5.times do |i|
+      puts "Is the first letter of your guess green? (Y/N)"
+        green = gets.chomp.upcase
+
+        until (green == 'Y' || green == 'N')
+          puts 'Invalid input, please enter (Y/N).'
+          green = gets.chomp.upcase
+        end
+      end
+    end
+  end
+end
+
 
 # not currently working, but it was at one point, will need to check git history
 def all_panagrams(letters:, word_length:, key_letter_or_word:, start_letters:, end_letters:)
