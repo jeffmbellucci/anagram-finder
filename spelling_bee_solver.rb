@@ -84,43 +84,11 @@ class SpellingBeeSolver
       @output = spelling_bee_solver(letters: , word_length: 15 , key_letter_or_word: , start_letters: '' , end_letters: '' , all_words: )
     end
 
-    puts "Last question, do you like smiles? (Y/N):"
-    @show_smile = gets.chomp.upcase
-
-    until (@show_smile == 'Y' || @show_smile == 'N')
-      puts 'Invalid input, please enter (Y/N).'
-      @show_smile = gets.chomp.upcase
-    end
-
     print "Jeff is working hard to find those words"; 15.times{ sleep 0.1; print '.' }; puts "\n"
     sleep(0.3)
     puts "Here are the words that Jeff found based on your inputs, ranked in order of most common to least:\n\n"
     puts "Sorry, I couldn't find any words that meet your criteria." if @output.empty?
     puts output if !@output.empty?
-
-    if @show_smile == 'Y'
-      sleep(0.2)
-      puts "\nHere's that smile for you!\n"
-
-        "    .-------.\n" \
-        "  .'          '.\n" \
-        " /   O      O   \\\n" \
-      "|                |\n" \
-      "|        ^       |\n" \
-      "| ',          ,' /\n" \
-        " \\  '-.____.-'  /\n" \
-        "  '.     U   .'\n" \
-          "    '-.....-'".chars.each { |char| print char; sleep(0.05) }; puts "\n"
-
-    else
-      puts "\nWho doesn't like smiles? ;-)"
-      "¯¯\\_(ツ)_/¯¯".chars.each { |char| print char; sleep(0.1) }; puts "\n"
-    end
-    puts "\nAnyway, Jeff always tries his best, and he would be happy to help you find more words if you like."
-    sleep(0.2)
-    puts 'And at very least, he is sorta clever.'
-    sleep(0.2)
-    puts 'And he really likes you.'
 
     puts "\nIf your word is not in the list we can run an expanded search, would you like to do that? (Y/N):"
       @expanded = gets.chomp.upcase
@@ -203,5 +171,5 @@ SpellingBeeSolver.new
 
 #pp WordFinder.new(letters: 'playome' , word_length: '', key_letter_or_word: '', start_letters: '', end_letters: '').anagrams
 
-#pp WordFinder.new(letters: 'qwertyuodfghjklzxvm', word_length: 5, key_letter_or_word: '', start_letters: '', end_letters: '').find.select { |word| word.include?('r') && word.include?('e') && word.include?('t') && word[1] != 'r' && word[2] != 'r' && word[3] == 'e'  && word[4] != 'e' && word[4] != 't'}
+#pp WordFinder.new(letters: 'wyoasdfgjkdfgjkzxvbm', word_length: 5, key_letter_or_word: '', start_letters: '', end_letters: '').find.select { |word| word.include?('s') && word.include?('s') && word.include?('s') && word[0] != 's' && word[2] == 'a' && word[3] == 's'}
 
