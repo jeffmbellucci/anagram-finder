@@ -40,7 +40,6 @@ end
 
 # This class will be used to get user inputs and run the solver
 class SpellingBeeSolver
-
   attr_reader :letters, :word_length, :key_letter_or_word, :start_letters, :end_letters, :all_words, :output
 
   def initialize
@@ -125,7 +124,6 @@ end
 
 
 
-
 class WordleSolver
 
   attr_reader :possible_letters
@@ -138,7 +136,7 @@ class WordleSolver
     6.times do
       puts "Enter your 5-letter guess:"
       word = gets.chomp.downcase
-      until (@letters.length == 7)
+      until (@letters.length == 5)
         puts 'That is not 5 letters, please enter 5 letters.'
         @letters = gets.chomp.downcase
       end
@@ -169,7 +167,7 @@ end
 # Execute the SpellingBeeSolver
 SpellingBeeSolver.new
 
-#pp WordFinder.new(letters: 'playome' , word_length: '', key_letter_or_word: '', start_letters: '', end_letters: '').anagrams
+#pp WordFinder.new(letters: 'plantim' , word_length: '', key_letter_or_word: '', start_letters: '', end_letters: '').anagrams
 
-#pp WordFinder.new(letters: 'wyoasdfgjkdfgjkzxvbm', word_length: 5, key_letter_or_word: '', start_letters: '', end_letters: '').find.select { |word| word.include?('s') && word.include?('s') && word.include?('s') && word[0] != 's' && word[2] == 'a' && word[3] == 's'}
+#pp WordFinder.new(letters: 'qweohjklzxvbn', word_length: 5, key_letter_or_word: '', start_letters: '', end_letters: '').find.select { |word| word.include?('l') && word.include?('l') && word.include?('n') && word.include?('e') && word[3] != 'n' && word[2] == 'l' && word[2] == 'l' && word[-1] != 'e' }
 
