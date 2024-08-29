@@ -123,51 +123,31 @@ class SpellingBeeSolver
 end
 
 
-
-class WordleSolver
-
-  attr_reader :possible_letters
-
-  def initialize
-    @possible_letters = (a..z).to_a
-  end
-
-  def solve
-    6.times do
-      puts "Enter your 5-letter guess:"
-      word = gets.chomp.downcase
-      until (@letters.length == 5)
-        puts 'That is not 5 letters, please enter 5 letters.'
-        @letters = gets.chomp.downcase
-      end
-
-      5.times do |i|
-      puts "Is the first letter of your guess green? (Y/N)"
-        green = gets.chomp.upcase
-
-        until (green == 'Y' || green == 'N')
-          puts 'Invalid input, please enter (Y/N).'
-          green = gets.chomp.upcase
-        end
-      end
-    end
-  end
-end
-
-
+class AnagramFinder
+  attr_reader :letters
 # not currently working, but it was at one point, will need to check git history
-def all_panagrams(letters:, word_length:, key_letter_or_word:, start_letters:, end_letters:)
-  output = []
-  word_length.downto(7).each do |word_length|
-    output << WordFinder.new(letters: letters, word_length:, key_letter_or_word:, start_letters:, end_letters:).anagrams
+  def initialize
+    # get the letters from the user
+    puts 'Input the letters you want anagrams for:'
+    @letters = gets.chomp.downcase
+
+    puts WordFinder.new(letters: , word_length: 15, key_letter_or_word: '', start_letters: '', end_letters: '').anagrams.map(&:upcase)
   end
-  output
+
+
+  def find_all(letters:, word_length:, key_letter_or_word:, start_letters:, end_letters:)
+    output = []
+    word_length.downto(7).each do |word_length|
+      output << WordFinder.new(letters: letters, word_length:, key_letter_or_word:, start_letters:, end_letters:).anagrams
+    end
+    output
+  end
 end
 
-# Execute the SpellingBeeSolver
-SpellingBeeSolver.new
-
+#AnagramFinder.new
 #pp WordFinder.new(letters: 'plantim' , word_length: '', key_letter_or_word: '', start_letters: '', end_letters: '').anagrams
 
-#pp WordFinder.new(letters: 'qweohjklzxvbn', word_length: 5, key_letter_or_word: '', start_letters: '', end_letters: '').find.select { |word| word.include?('l') && word.include?('l') && word.include?('n') && word.include?('e') && word[3] != 'n' && word[2] == 'l' && word[2] == 'l' && word[-1] != 'e' }
 
+# Execute the SpellingBeeSolver
+
+SpellingBeeSolver.new
