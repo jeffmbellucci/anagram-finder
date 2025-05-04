@@ -22,4 +22,4 @@ def solution_tester
   puts solved
 end
 
-puts Anagrams.new.find('relations')
+puts Anagrams.new.find('disagreement')
