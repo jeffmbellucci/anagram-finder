@@ -21,8 +21,8 @@ class Anagrams
     dict_url = 'https://raw.githubusercontent.com/jeffmbellucci/anagram-finder/main/scrabble_dictionary.txt'
     words = URI.open(dict_url).readlines.map(&:chomp)
     @@sorted_dict = Hash.new { |h,k| h[k] = [] }
-    words.each do |w|
-      @@sorted_dict[signature(w)] << w
+    words.each do |word|
+      @@sorted_dict[signature(word)] << word
     end
   end
 
@@ -41,4 +41,5 @@ def solution_tester
   puts anagrams.find('cinema').sort == %w[iceman anemic]
 end
 
-puts Anagrams.new.find('disagreement')
+puts Anagrams.new.find('leint')
+

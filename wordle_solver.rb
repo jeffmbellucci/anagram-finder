@@ -1,5 +1,3 @@
-require 'csv'
-
 class WordFinder
   attr_reader :letters, :dict, :word_length, :key_letter_or_word, :start_letters, :end_letters
 
@@ -56,6 +54,6 @@ class WordleSolver
   end
 end
 
-unused = ('a'..'z').to_a - 'craetoispdgy'.split('')
-pp WordFinder.new(letters: unused, word_length: 5, key_letter_or_word: '', start_letters: '', end_letters: '').find.select { |word| word.include?('n') && word.include?('l') && word.include?('u') && word.include?('u') && word[0] != 't' && word[2] != 'A' && word[-2] == 'n'}
+unused = ('a'..'z').to_a - 'nesplit'.split('')
+pp WordFinder.new(letters: unused, word_length: 5, key_letter_or_word: '', start_letters: '', end_letters: '').find.select { |word| word.include?('c') && word.include?('r') && word.include?('a') && word.include?('a') && word[0] == 'c' && word[1] != 'r' && word[2] != 'a' && word[-1] != 'e'}
 
