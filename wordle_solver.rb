@@ -54,6 +54,20 @@ class WordleSolver
   end
 end
 
-unused = ('a'..'z').to_a - 'nesplit'.split('')
-pp WordFinder.new(letters: unused, word_length: 5, key_letter_or_word: '', start_letters: '', end_letters: '').find.select { |word| word.include?('c') && word.include?('r') && word.include?('a') && word.include?('a') && word[0] == 'c' && word[1] != 'r' && word[2] != 'a' && word[-1] != 'e'}
+guessed = 'creils'
+remaining = unused = ('a'..'z').to_a - guessed.split('')
+output = WordFinder.new(letters: remaining, word_length: 5, key_letter_or_word: '', start_letters: '', end_letters: '').find.select do |word| 
+  word.include?('t') && 
+  word.include?('a') && 
+  word.include?('o') && 
+  word.include?('n') && 
+  word[0] != 't' && 
+  word[1] != 'o' &&
+  word[1] != 'r' &&
+  word[2] != 'a' &&
+  word[2] != 'i' &&
+  word[3] != 'n' &&
+  word[4] != 'e'
+end
 
+pp output
