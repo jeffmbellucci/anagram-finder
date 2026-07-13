@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class WordFinder
   attr_reader :letters, :dict, :dict_hash, :candidates, :word_length
 
@@ -25,7 +27,7 @@ class WordFinder
         word.include?(opts[:key_letter_or_word]) &&
         (word[0..opts[:start_letters].length - 1] == opts[:start_letters] ||
         options[:start_letters].empty?) &&
-        (word[-opts[:end_letters].length..-1] == opts[:end_letters] ||
+        (word[-opts[:end_letters].length..] == opts[:end_letters] ||
         options[:start_letters].empty?)
     end
 
@@ -41,7 +43,7 @@ class WordFinder
   private
 
   def percentage(a, b, decimal_places = 4)
-    (a.to_f / b.to_f * 100.0).round(decimal_places)
+    (a.to_f / b * 100.0).round(decimal_places)
   end
 
   def factorial(n)
@@ -58,8 +60,7 @@ results = WordFinder.new(
 ).find
 
 puts "Possibilities:\n"
-puts results.filter_map { |word| word if word[0] == 's' && word[-3..-1] == 'ate' }
-
+puts(results.filter_map { |word| word if word[0] == 's' && word[-3..] == 'ate' })
 
 # Copilot advice:
 # I see a few things that may help you improve your code.

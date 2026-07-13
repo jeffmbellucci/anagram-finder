@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TrieNode
   attr_accessor :children, :is_word
 
@@ -23,7 +25,7 @@ class Trie
 
   def search(word)
     node = search_prefix(word)
-    node && node.is_word
+    node&.is_word
   end
 
   def starts_with(prefix)
@@ -37,6 +39,7 @@ class Trie
     node = @root
     prefix.each_char do |char|
       return nil unless node.children[char]
+
       node = node.children[char]
     end
     node

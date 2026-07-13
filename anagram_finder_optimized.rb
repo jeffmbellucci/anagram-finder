@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'open-uri'
 
 class Anagrams
@@ -20,7 +22,7 @@ class Anagrams
   def load_dict
     dict_url = 'https://raw.githubusercontent.com/jeffmbellucci/anagram-finder/main/scrabble_dictionary.txt'
     words = URI.open(dict_url).readlines.map(&:chomp)
-    @@sorted_dict = Hash.new { |h,k| h[k] = [] }
+    @@sorted_dict = Hash.new { |h, k| h[k] = [] }
     words.each do |word|
       @@sorted_dict[signature(word)] << word
     end
@@ -42,4 +44,4 @@ def solution_tester
 end
 
 puts Anagrams.new.find('leint')
-
+puts Anagrams.new.find('cinema')

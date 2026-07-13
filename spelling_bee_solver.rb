@@ -77,10 +77,22 @@ class SpellingBeeSolver
       puts 'Enter a suffix or last letter for the words (enter blank to skip):'
       @end_letters = gets.chomp.downcase || ''
 
-      @output = spelling_bee_solver(letters: , word_length: , key_letter_or_word: , start_letters: , end_letters: , all_words: )
+      @output = spelling_bee_solver(
+        letters: letters,
+        word_length: word_length,
+        key_letter_or_word: key_letter_or_word,
+        start_letters: start_letters,
+        end_letters: end_letters
+      )
     else
       # Output all the words
-      @output = spelling_bee_solver(letters: , word_length: 15 , key_letter_or_word: , start_letters: '' , end_letters: '' , all_words: )
+      @output = spelling_bee_solver(
+        letters: letters,
+        word_length: 15,
+        key_letter_or_word: key_letter_or_word,
+        start_letters: '',
+        end_letters: ''
+      )
     end
 
     print "Jeff is working hard to find those words"; 15.times{ sleep 0.1; print '.' }; puts "\n"
@@ -131,7 +143,13 @@ class AnagramFinder
     puts 'Input the letters you want anagrams for:'
     @letters = gets.chomp.downcase
 
-    puts WordFinder.new(letters: , word_length: 15, key_letter_or_word: '', start_letters: '', end_letters: '').anagrams.map(&:upcase)
+    puts WordFinder.new(
+      letters: @letters,
+      word_length: 15,
+      key_letter_or_word: '',
+      start_letters: '',
+      end_letters: ''
+    ).anagrams.map(&:upcase)
   end
 
 
@@ -144,8 +162,6 @@ class AnagramFinder
   end
 end
 
-#AnagramFinder.new
-#pp WordFinder.new(letters: 'plantim' , word_length: '', key_letter_or_word: '', start_letters: '', end_letters: '').anagrams
 
 # Execute the SpellingBeeSolver
 SpellingBeeSolver.new

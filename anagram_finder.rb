@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class Anagrams
   def initialize
     # Your code here
   end
 
   def find(word)
-   # Your code here
+    # Your code here
   end
 end
 
