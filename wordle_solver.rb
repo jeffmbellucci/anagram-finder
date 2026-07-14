@@ -5,13 +5,17 @@ PAGE_SIZE = 20
 
 class WordleSolver
   def initialize
-    @dict = File.readlines('./scrabble_dictionary.txt')
+    @frequency = CSV.read('./word_frequency.csv').to_h.transform_values(&:to_i)
+
+    @dict = @frequency.keys
+                .map(&:downcase)
+                .select { |word| word.length == 5 }
+
+    @valid_guesses = File.readlines('./scrabble_dictionary.txt')
                 .map(&:chomp)
                 .map(&:downcase)
                 .select { |word| word.length == 5 }
-    @valid_guesses = @dict.to_set
-
-    @frequency = CSV.read('./word_frequency.csv').to_h.transform_values(&:to_i)
+                .to_set
 
     reset_state
   end
