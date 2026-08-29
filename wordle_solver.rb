@@ -4,6 +4,8 @@ require 'set'
 
 PAGE_SIZE = 20
 
+RestartGame = Class.new(StandardError)
+
 class WordleSolver
   def initialize
     @frequency = CSV.read('./word_frequency.csv').to_h.transform_values(&:to_i)
@@ -23,11 +25,14 @@ class WordleSolver
   end
 
   def solve
+    trap('TSTP') { raise RestartGame }
+
     puts 'Welcome to Wordle Solver!'
     puts "Enter guesses and results. Use CAPITAL for green, lowercase for yellow, '-' for gray."
     puts "Example: guess 'crane', result '-rA-E' means green at 2,4 and yellow at 1.\n\n"
 
-    loop do
+loop do
+      begin
       6.times do |turn|
         puts "--- Guess #{turn + 1} of 6 ---"
         print 'Guess: '
@@ -126,6 +131,10 @@ class WordleSolver
 
       reset_state
       puts "\n"
+      rescue RestartGame
+        puts "\nStarting a new game...\n\n"
+        reset_state
+      end
     end
   end
 
