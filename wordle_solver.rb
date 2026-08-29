@@ -4,7 +4,7 @@ require 'set'
 
 PAGE_SIZE = 20
 
-RestartGame = Class.new(StandardError)
+RESTART_GAME = Class.new(StandardError)
 
 class WordleSolver
   def initialize
@@ -25,7 +25,7 @@ class WordleSolver
   end
 
   def solve
-    trap('TSTP') { raise RestartGame }
+    trap('TSTP') { raise RESTART_GAME }
 
     puts 'Welcome to Wordle Solver!'
     puts "Enter guesses and results. Use CAPITAL for green, lowercase for yellow, '-' for gray."
@@ -131,7 +131,7 @@ loop do
 
       reset_state
       puts "\n"
-      rescue RestartGame
+      rescue RESTART_GAME
         puts "\nStarting a new game...\n\n"
         reset_state
       end
@@ -248,7 +248,9 @@ loop do
   end
 
   def read_input
-    gets&.chomp || ''
+    input = gets&.chomp || ''
+    raise RESTART_GAME if input.match?(/[\e\u03a9]/)
+    input
   end
 
   def yes?(input)
