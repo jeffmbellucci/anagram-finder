@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require 'csv'
+require 'set'
 
 PAGE_SIZE = 20
 
@@ -7,15 +8,16 @@ class WordleSolver
   def initialize
     @frequency = CSV.read('./word_frequency.csv').to_h.transform_values(&:to_i)
 
-    @dict = @frequency.keys
-                .map(&:downcase)
-                .select { |word| word.length == 5 }
-
     @valid_guesses = File.readlines('./scrabble_dictionary.txt')
                 .map(&:chomp)
                 .map(&:downcase)
                 .select { |word| word.length == 5 }
                 .to_set
+
+    @dict = @frequency.keys
+                .map(&:downcase)
+                .select { |word| word.length == 5 }
+                .select { |word| @valid_guesses.include?(word) }
 
     reset_state
   end
