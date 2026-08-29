@@ -42,15 +42,6 @@ class WordleSolver
           guess = read_input.strip.downcase
         end
 
-        if turn > 0
-          print 'Did you get it? (Y/N): '
-          answer = read_input
-          if yes?(answer)
-            puts congratulate(turn + 1)
-            break
-          end
-        end
-
         print 'Enter Result: '
         result = read_input.strip
 
@@ -245,23 +236,6 @@ class WordleSolver
       break unless yes?(answer)
     end
     puts '--- End of Possible remaining guess words ---' if offset >= candidates.length
-  end
-
-  def congratulate(guesses)
-    case guesses
-    when 1
-      "\nIncredible! A hole in one! You got today's WORDLE in 1 guess!"
-    when 2
-      "\nGenius! You got today's WORDLE in 2 guesses!"
-    when 3
-      "\nAmazing! You got today's WORDLE in 3 guesses!"
-    when 4
-      "\nNice work! You got today's WORDLE in 4 guesses!"
-    when 5
-      "\nGood job! You got today's WORDLE in 5 guesses!"
-    when 6
-      "\nPhew, just under the wire! You got today's WORDLE in 6 guesses!"
-    end
   end
 
   def read_input
